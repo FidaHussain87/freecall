@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e1e2e">
+    <meta name="description" content="Free Call - REST API Testing Tool">
+    <title>Free Call</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+</head>
+<body>
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <span class="logo">&#9889;</span>
+                <h1>Free Call</h1>
+                <button id="sidebar-close" class="sidebar-close" aria-label="Close sidebar">&times;</button>
+            </div>
+
+            <!-- Environment selector -->
+            <div class="env-selector">
+                <select id="env-select" onchange="App.activateEnvFromSelector()" aria-label="Select environment">
+                    <option value="">No Environment</option>
+                </select>
+                <button class="btn-icon" onclick="App.showEnvironmentModal()" title="Manage Environments" aria-label="Manage environments">&#9881;</button>
+            </div>
+
+            <div class="sidebar-tabs">
+                <button class="sidebar-tab active" data-panel="collections">Collections</button>
+                <button class="sidebar-tab" data-panel="history">History</button>
+            </div>
+
+            <!-- Collections Panel -->
+            <div class="sidebar-panel" id="sidebar-collections" style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+                <div class="sidebar-toolbar">
+                    <button class="btn btn-sm btn-primary" onclick="App.showNewCollectionModal()" style="flex:1">+ New Collection</button>
+                    <button class="btn btn-sm" onclick="App.showImportModal()" title="Import">Import</button>
+                    <button class="btn btn-sm" onclick="App.exportAllCollections()" title="Export All">Export</button>
+                </div>
+                <div class="sidebar-content" id="collections-list"></div>
+            </div>
+
+            <!-- History Panel -->
+            <div class="sidebar-panel" id="sidebar-history" style="display:none;flex:1;overflow:hidden;flex-direction:column">
+                <div class="sidebar-toolbar">
+                    <button class="btn btn-sm btn-danger" onclick="App.clearHistory()" style="flex:1">Clear History</button>
+                </div>
+                <div class="sidebar-content" id="history-list"></div>
+            </div>
+        </div>
+
+        <!-- Main Pane -->
+        <div class="main-pane">
+            <!-- URL Bar -->
+            <div class="url-bar">
+                <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Open sidebar">&#9776;</button>
+                <select id="method-select" class="method-select method-GET" aria-label="HTTP method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="PATCH">PATCH</option>
+                    <option value="DELETE">DELETE</option>
+                    <option value="HEAD">HEAD</option>
+                    <option value="OPTIONS">OPTIONS</option>
+                </select>
+                <input type="text" id="url-input" class="url-input" placeholder="Enter URL or paste cURL..." aria-label="Request URL">
+                <button id="send-btn" class="send-btn">Send</button>
+                <button class="btn btn-sm" onclick="App.showSaveRequestModal()" title="Save Request">Save</button>
+            </div>
+
+            <div class="request-area">
+                <!-- Request Config -->
+                <div class="request-config" id="request-config">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="params">Params</button>
+                        <button class="tab" data-tab="headers">Headers</button>
+                        <button class="tab" data-tab="body">Body</button>
+                        <button class="tab" data-tab="auth">Auth</button>
+                    </div>
+
+                    <div id="req-params" class="tab-content active">
+                        <div id="params-editor" class="kv-editor"></div>
+                    </div>
+
+                    <div id="req-headers" class="tab-content">
+                        <div id="headers-editor" class="kv-editor"></div>
+                    </div>
+
+                    <div id="req-body" class="tab-content">
+                        <div class="body-controls">
+                            <select id="body-type" class="body-type-select">
+                                <option value="none">None</option>
+                                <option value="json">JSON</option>
+                                <option value="form">Form Data</option>
+                                <option value="raw">Raw</option>
+                            </select>
+                            <button id="body-format-btn" class="btn btn-sm">Format</button>
+                        </div>
+                        <div class="code-editor-wrap" id="code-editor-wrap">
+                            <pre class="code-editor-highlight" id="code-editor-highlight" aria-hidden="true"></pre>
+                            <textarea id="body-content" class="code-editor-textarea" placeholder='{"key": "value"}' spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="req-auth" class="tab-content">
+                        <div class="auth-config">
+                            <select id="auth-type" class="auth-type-select">
+                                <option value="none">No Auth</option>
+                                <option value="bearer">Bearer Token</option>
+                                <option value="basic">Basic Auth</option>
+                                <option value="api_key">API Key</option>
+                            </select>
+                            <div id="auth-fields" class="auth-fields">
+                                <p style="color:var(--text-muted);font-size:12px">No authentication</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Draggable Resize Handle -->
+                <div class="pane-resizer" id="pane-resizer" title="Drag to resize"></div>
+
+                <!-- Response -->
+                <div class="response-area" id="response-area">
+                    <div id="response-status-bar" class="response-status-bar"></div>
+
+                    <div class="tabs">
+                        <button class="tab active" data-tab="body">Body</button>
+                        <button class="tab" data-tab="headers">Headers</button>
+                        <button class="tab" data-tab="raw">Raw</button>
+                    </div>
+
+                    <div id="resp-body" class="tab-content active" style="flex:1;max-height:none">
+                        <div class="response-body-container" id="response-body">
+                            <div class="empty-state">
+                                <p>Send a request to see the response</p>
+                                <p style="font-size:11px;margin-top:8px;color:var(--text-muted)">Ctrl+Enter / Cmd+Enter to send</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="resp-headers" class="tab-content" style="flex:1;max-height:none">
+                        <div class="response-body-container" id="response-headers"></div>
+                    </div>
+
+                    <div id="resp-raw" class="tab-content" style="flex:1;max-height:none">
+                        <div class="response-body-container" id="response-raw"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/ui.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

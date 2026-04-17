@@ -1,0 +1,11 @@
+@import './tokens.css';
+@import './themes/cyberpunk-dark.css';
+@import './themes/neon-plasma.css';
+@import './themes/frosted-light.css';
+@import './themes/minimal-dark.css';
+@import './glassmorphism.css';
+@import './scrollbar.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

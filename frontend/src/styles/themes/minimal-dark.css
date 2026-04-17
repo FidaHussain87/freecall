@@ -1,0 +1,46 @@
+/* Theme 4: Minimal Dark */
+[data-theme="minimal-dark"] {
+  --fc-bg-primary: #1a1a2e;
+  --fc-bg-secondary: #22223a;
+  --fc-bg-tertiary: #2a2a44;
+  --fc-bg-hover: #32324e;
+  --fc-bg-active: #3a3a58;
+
+  --fc-accent: #7aa2f7;
+  --fc-accent-hover: #92b4ff;
+  --fc-accent-dim: rgba(122, 162, 247, 0.12);
+
+  --fc-text-primary: #c8d0e0;
+  --fc-text-secondary: #8890a8;
+  --fc-text-muted: #505870;
+
+  --fc-border: rgba(255, 255, 255, 0.08);
+  --fc-border-active: rgba(122, 162, 247, 0.3);
+
+  --fc-green: #9ece6a;
+  --fc-red: #f7768e;
+  --fc-orange: #ff9e64;
+  --fc-yellow: #e0af68;
+  --fc-purple: #bb9af7;
+  --fc-cyan: #7dcfff;
+  --fc-pink: #ff78a9;
+
+  --fc-glow-color: transparent;
+
+  --fc-glass-bg: rgba(34, 34, 58, 0.95);
+  --fc-glass-bg-strong: rgba(34, 34, 58, 0.98);
+  --fc-glass-border: rgba(255, 255, 255, 0.06);
+
+  --fc-method-get: #9ece6a;
+  --fc-method-post: #e0af68;
+  --fc-method-put: #ff9e64;
+  --fc-method-patch: #bb9af7;
+  --fc-method-delete: #f7768e;
+  --fc-method-head: #7dcfff;
+  --fc-method-options: #ff78a9;
+
+  --fc-status-2xx: #9ece6a;
+  --fc-status-3xx: #7dcfff;
+  --fc-status-4xx: #ff9e64;
+  --fc-status-5xx: #f7768e;
+}

@@ -1,0 +1,40 @@
+/* Glassmorphism utility classes */
+.glass-panel {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: var(--fc-glass-bg);
+  border: 1px solid var(--fc-glass-border);
+  border-radius: var(--fc-radius-lg);
+}
+
+.glass-panel-strong {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background-color: var(--fc-glass-bg-strong);
+  border: 1px solid var(--fc-glass-border);
+  border-radius: var(--fc-radius-lg);
+}
+
+.glass-input {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: var(--fc-bg-tertiary);
+  border: 1px solid var(--fc-border);
+  border-radius: var(--fc-radius-md);
+  transition: border-color var(--fc-transition-fast), box-shadow var(--fc-transition-fast);
+}
+
+.glass-input:focus {
+  border-color: var(--fc-border-active);
+  box-shadow: 0 0 0 2px var(--fc-accent-dim);
+  outline: none;
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px var(--fc-glow-color); }
+  50% { box-shadow: 0 0 20px var(--fc-glow-color); }
+}

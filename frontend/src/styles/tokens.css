@@ -1,0 +1,33 @@
+/* Base design tokens - values are set by theme files */
+:root {
+  /* Typography */
+  --fc-font-sans: 'Inter', system-ui, sans-serif;
+  --fc-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Radii */
+  --fc-radius-sm: 4px;
+  --fc-radius-md: 8px;
+  --fc-radius-lg: 12px;
+  --fc-radius-xl: 16px;
+
+  /* Spacing scale */
+  --fc-space-xs: 4px;
+  --fc-space-sm: 8px;
+  --fc-space-md: 12px;
+  --fc-space-lg: 16px;
+  --fc-space-xl: 24px;
+
+  /* Transitions */
+  --fc-transition-fast: 150ms ease;
+  --fc-transition-normal: 250ms ease;
+  --fc-transition-slow: 350ms ease;
+
+  /* Sidebar */
+  --fc-sidebar-width: 280px;
+  --fc-sidebar-collapsed: 0px;
+
+  /* Z-index scale */
+  --fc-z-dropdown: 100;
+  --fc-z-modal: 200;
+  --fc-z-toast: 300;
+}

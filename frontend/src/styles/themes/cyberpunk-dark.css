@@ -1,0 +1,48 @@
+/* Theme 1: Cyberpunk Dark (Default) */
+[data-theme="cyberpunk-dark"] {
+  --fc-bg-primary: #0a0a1a;
+  --fc-bg-secondary: #111128;
+  --fc-bg-tertiary: #1a1a3e;
+  --fc-bg-hover: #222250;
+  --fc-bg-active: #2a2a5e;
+
+  --fc-accent: #6c8cff;
+  --fc-accent-hover: #8aa4ff;
+  --fc-accent-dim: rgba(108, 140, 255, 0.15);
+
+  --fc-text-primary: #e4e4f0;
+  --fc-text-secondary: #a0a0c0;
+  --fc-text-muted: #606080;
+
+  --fc-border: rgba(108, 140, 255, 0.15);
+  --fc-border-active: rgba(108, 140, 255, 0.4);
+
+  --fc-green: #50fa7b;
+  --fc-red: #ff5555;
+  --fc-orange: #ffb86c;
+  --fc-yellow: #f1fa8c;
+  --fc-purple: #bd93f9;
+  --fc-cyan: #8be9fd;
+  --fc-pink: #ff79c6;
+
+  --fc-glow-color: rgba(108, 140, 255, 0.3);
+
+  --fc-glass-bg: rgba(17, 17, 40, 0.7);
+  --fc-glass-bg-strong: rgba(17, 17, 40, 0.85);
+  --fc-glass-border: rgba(108, 140, 255, 0.12);
+
+  /* Method colors */
+  --fc-method-get: #50fa7b;
+  --fc-method-post: #f1fa8c;
+  --fc-method-put: #ffb86c;
+  --fc-method-patch: #bd93f9;
+  --fc-method-delete: #ff5555;
+  --fc-method-head: #8be9fd;
+  --fc-method-options: #ff79c6;
+
+  /* Status colors */
+  --fc-status-2xx: #50fa7b;
+  --fc-status-3xx: #8be9fd;
+  --fc-status-4xx: #ffb86c;
+  --fc-status-5xx: #ff5555;
+}
